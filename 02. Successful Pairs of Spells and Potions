@@ -1,0 +1,27 @@
+Method 01: Successful Pairs of Spells and Potions
+
+
+class Solution {
+    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+        
+        int m=spells.length;
+        int n=potions.length;
+        int arr[]=new int[m];
+        Arrays.sort(potions);
+        int count=0;
+        for(int i=0;i<m;i++){
+            int l=0, r=n;
+            while(l<r){
+                int mid = l + (r - l) / 2;
+                if((long)spells[i]*(long)potions[mid]>=success){
+                    r=mid;
+                }
+                else{
+                    l=mid+1;
+                }
+            }
+            arr[i]=n-l;
+        }
+        return arr;
+    }
+}
