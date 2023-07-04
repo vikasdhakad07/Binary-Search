@@ -1,0 +1,36 @@
+Method 01: Aggressive Cows
+
+
+class Solution {
+    public static int solve(int n, int k, int[] stalls) {
+        Arrays.sort(stalls);
+        int l=1;
+        int h=stalls[n-1]-stalls[0];
+        int ans=0;
+        while(l<=h){
+            int mid=(l+h)/2;
+            if(isPlaced(n,k,stalls,mid)){
+                ans=mid;
+                l=mid+1;
+            }
+            else{
+                h=mid-1;
+            }
+        }
+        return ans;
+    }
+    public static boolean isPlaced(int n, int k, int a[], int dist){
+        int sum=a[0];
+        int cnt=1;
+        for(int i=1;i<n;i++){
+            if(a[i]-sum>=dist){
+                cnt++;
+                sum=a[i];
+            }
+        }
+    if(cnt>=k){
+        return true;
+    }
+    return false;
+    }
+}
